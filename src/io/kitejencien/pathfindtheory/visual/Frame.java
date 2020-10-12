@@ -15,7 +15,7 @@ public class Frame extends JFrame {
     private BlockMap map;
     private Player player;
     private Panel panel;
-    private int blockSize;
+    public static int blockSize;
 
     public Frame(Player player) throws HeadlessException {
 

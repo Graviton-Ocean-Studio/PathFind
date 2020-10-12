@@ -1,6 +1,7 @@
 package com.daixuan.algorithms;
 
 import io.kitejencien.pathfindtheory.Vector2i;
+import io.kitejencien.pathfindtheory.visual.Frame;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,14 +14,13 @@ public class NavigationPath implements Iterator {
     private ArrayList<NavigationMovement> _movements;
     private int _pointer;
     private Vector2i start, _currentPosision;
-    float blockSize;
-    public NavigationPath(Vector2i start, NavigationMovement[] movements, float blockSize) {
+    float blockSize = Frame.blockSize;
+    public NavigationPath(Vector2i start, NavigationMovement[] movements) {
         _pointer = 0;
         this.start = start;
         this._currentPosision = new Vector2i(start.getX(), start.getY());
         this._movements = new ArrayList<>();
         this._movements.addAll(Arrays.asList(movements));
-        this.blockSize = blockSize;
     }
 
     public void addMovement(NavigationMovement navigationMovement) {

@@ -25,8 +25,18 @@ public class Vector2i {
         return new Vector2i(this._x + movement.getX(),this._y + movement.getY());
 
     }
+
+    public Vector2i subtract(Vector2i movement) {
+        return new Vector2i(this._x - movement.getX(),this._y - movement.getY());
+
+    }
+
     public Vector2i add(int x, int y) {
         return add(new Vector2i(x,y));
+    }
+
+    public boolean equals(Vector2i anotherValue) {
+        return this._x == anotherValue.getX() && this._y == anotherValue.getY();
     }
 
     public void set(Vector2i newValue) {
