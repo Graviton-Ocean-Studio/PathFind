@@ -43,7 +43,7 @@ public class Panel extends JPanel {
 
         paintMap(g);
         paintPlayer(g);
-        renderers.forEach((renderer) ->  renderer.accept(g));
+        renderers.forEach(renderer ->  renderer.accept(g));
     }
     public void paintPlayer(Graphics g) {
         Vector2i position = player.getPosition();

@@ -1,6 +1,10 @@
 package io.kitejencien.pathfindtheory;
 
+/**
+ * @author QueueHuo
+ */
 public class Vector2i {
+
     private int _x, _y;
     public Vector2i(int x, int y) {
         this._x = x;

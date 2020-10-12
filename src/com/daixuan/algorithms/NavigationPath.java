@@ -9,6 +9,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
+/**
+ * @author QueueHuo
+ */
 public class NavigationPath implements Iterator {
     private ArrayList<NavigationMovement> _movements;
     private int _pointer;
@@ -33,8 +36,7 @@ public class NavigationPath implements Iterator {
         g2d.setColor(Color.green);
         Vector2i position, nextPosition;
         position = start;
-        for (NavigationMovement movement: _movements
-             ) {
+        for (NavigationMovement movement: _movements) {
             nextPosition = movement.nextPosition(position);
             g2d.drawLine((int)((position.getX() + 0.5) * blockSize) + 1, (int)(( position.getY() + 0.5) * blockSize) + 1, (int)((nextPosition.getX() + 0.5) * blockSize) + 1, (int)((nextPosition.getY() + 0.5) * blockSize) + 1);
             position = nextPosition;

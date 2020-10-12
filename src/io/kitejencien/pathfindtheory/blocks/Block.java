@@ -10,12 +10,15 @@ public class Block {
     private int timeOnPass;
     private boolean canPass;
     private boolean visited = false;
+    private boolean visiting = false;
+    private Vector2i pos;
     private int x;
     private int y;
 
     public Block(int x, int y){
         this.x = x;
         this.y = y;
+        this.pos = new Vector2i(x,y);
         this.timeOnPass  =1;
         this.canPass = true;
     }
@@ -47,6 +50,14 @@ public class Block {
 
     public boolean isVisited() {
         return visited;
+    }
+
+    public boolean isVisiting() {
+        return visiting;
+    }
+
+    public Vector2i getPos() {
+        return pos;
     }
 
     public void setVisited(boolean visited) {
