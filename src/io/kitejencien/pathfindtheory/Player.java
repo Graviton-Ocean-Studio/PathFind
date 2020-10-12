@@ -15,10 +15,14 @@ public class Player {
         this.position = new Vector2i(initX, initY);
         this.map = map;
     }
-    public void moveTo(Vector2i newPosition) {
+    public boolean moveTo(Vector2i newPosition) {
+        if(newPosition.getX() < 0 || newPosition.getX() >= map.xl) return false;
+        if(newPosition.getY() < 0 || newPosition.getY() >= map.yl) return false;
         this.position.set(newPosition);
+        return true;
 
     }
+    public Vector2i getPosition() {return position;}
     public Block getBlock(){
         return this.map.blocks[this.position.getX()][this.position.getY()];
     }

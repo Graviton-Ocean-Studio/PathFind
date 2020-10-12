@@ -21,6 +21,14 @@ public class Vector2i {
         this._y = y;
     }
 
+    public Vector2i add(Vector2i movement) {
+        return new Vector2i(this._x + movement.getX(),this._y + movement.getY());
+
+    }
+    public Vector2i add(int x, int y) {
+        return add(new Vector2i(x,y));
+    }
+
     public void set(Vector2i newValue) {
         this._x = newValue.getX();
         this._y = newValue.getY();

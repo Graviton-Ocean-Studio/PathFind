@@ -27,7 +27,7 @@ public class Frame extends JFrame {
         setSize(initFrameSize());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        Panel panel = new Panel(this,player);
+        this.panel = new Panel(this,player);
 
         this.add(panel);
 
@@ -37,9 +37,9 @@ public class Frame extends JFrame {
     public Dimension initFrameSize(){
         Dimension screenSize = getToolkit().getScreenSize();
         if(map.xl >= map.yl){
-            this.blockSize = (int)(screenSize.getWidth()/(2*map.xl));
+            this.blockSize = (int)(screenSize.getWidth()/(2*map.xl)) + 4;
         }else{
-            this.blockSize = (int)((screenSize.getHeight()*1.5)/(2*map.yl));
+            this.blockSize = (int)((screenSize.getHeight()*1.5)/(2*map.yl)) + 4;
         }
         return new Dimension(map.xl*blockSize,map.yl*blockSize);
     }
@@ -53,7 +53,7 @@ public class Frame extends JFrame {
     }
 
     public Panel getPanel() {
-        return panel;
+        return this.panel;
     }
 
     public Player getPlayer() {
