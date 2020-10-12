@@ -7,33 +7,20 @@ import io.kitejencien.pathfindtheory.blocks.Block;
  */
 public class Player {
 
-    private int x,y;
+    private Vector2i position;
+
     private BlockMap map;
 
     public Player(int initX, int initY, BlockMap map){
-        this.x = initX;
-        this.y = initY;
+        this.position = new Vector2i(initX, initY);
         this.map = map;
     }
+    public void moveTo(Vector2i newPosition) {
+        this.position.set(newPosition);
 
-    public int getY() {
-        return y;
     }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public Block getBlock(){
-        return this.map.blocks[x][y];
+        return this.map.blocks[this.position.getX()][this.position.getY()];
     }
 
     public BlockMap getMap() {

@@ -1,5 +1,7 @@
 package io.kitejencien.pathfindtheory.blocks;
 
+import io.kitejencien.pathfindtheory.Vector2i;
+
 /**
  * every cell in the pathfind graph
  */
@@ -33,6 +35,7 @@ public class Block {
     public void setCanPass(boolean canPass) {
         this.canPass = canPass;
     }
+
 
     public int getX() {
         return x;
