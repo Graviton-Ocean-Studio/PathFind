@@ -21,6 +21,8 @@ public class BlockMapBuilder {
     //to initialize the dimensions
     public BlockMapBuilder setDimensions(int xRange, int yRange){
         this.blockMap.blocks = new Block[xRange][yRange];
+        this.blockMap.xl = xRange;
+        this.blockMap.yl = yRange;
         return this;
     }
 
@@ -49,6 +51,9 @@ public class BlockMapBuilder {
     public BlockMap build(){
         if(blockMap.blocks != null)
         return this.blockMap;
-        else return null;
+        else {
+            System.out.println("ERROR: NULL BLOCKS");
+            return null;
+        }
     }
 }

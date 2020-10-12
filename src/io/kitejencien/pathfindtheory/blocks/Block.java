@@ -7,6 +7,7 @@ public class Block {
 
     private int timeOnPass;
     private boolean canPass;
+    private boolean visited = false;
     private int x;
     private int y;
 
@@ -39,5 +40,13 @@ public class Block {
 
     public int getY() {
         return y;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 }

@@ -11,10 +11,8 @@ import io.kitejencien.pathfindtheory.blocks.GoalBlock;
 public class BlockMap {
 
     public Block[][] blocks;
-
-    public void setBlocks(Block[][] blocks) {
-        this.blocks = blocks;
-    }
+    public int xl;
+    public int yl;
 
     public Block[][] getBlocks() {
         return blocks;
