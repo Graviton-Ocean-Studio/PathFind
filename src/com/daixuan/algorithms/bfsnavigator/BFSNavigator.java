@@ -13,12 +13,12 @@ public class BFSNavigator implements IPlayerNavigator {
 
     public BFSNavigator() {
         _movements = new ArrayList<>();
-        queue = new LinkedList<Vector2i>();
+        queue = new PriorityQueue<>();
 
     }
     BlockMap _map;
     ArrayList<NavigationMovement> _movements;
-    Queue<Vector2i> queue;
+    Queue<BFSNavigatorQueueingNode> queue;
     BFSNavigationNodeMap _nodeMap;
     @Override
     public void loadMap(BlockMap blockMap) {
@@ -33,21 +33,23 @@ public class BFSNavigator implements IPlayerNavigator {
     }
     private void integratedVisit(Vector2i position, Vector2i from) {
         _map.getBlock(position.getX(), position.getY()).setVisited(true);
+
         _nodeMap.isVisited[position.getX()][position.getY()] = true;
         _nodeMap.from[position.getX()][position.getY()] = from;
     }
 
     @Override
     public NavigationPath find(Vector2i from, Vector2i to) {
+        _map.setGoal(to.getX(),to.getY());
         queue.clear();
 
-        queue.add(from);
+        queue.add(new BFSNavigatorQueueingNode(from, 0));
         integratedVisit(from, from);
-        Vector2i currentHead;
+        BFSNavigatorQueueingNode currentHead;
         while(!queue.isEmpty()) {
             currentHead = queue.poll();
 
-            if(currentHead.equals(to)) {
+            if(currentHead.position.equals(to)) {
                 Stack<Vector2i> path = new Stack<>();
                 Vector2i current = new Vector2i(0,0);
                 current.set(to);
@@ -69,15 +71,15 @@ public class BFSNavigator implements IPlayerNavigator {
 
             for (NavigationMovement m: _movements
                  ) {
-                Vector2i nextPosition = m.nextPosition(currentHead);
+                Vector2i nextPosition = m.nextPosition(currentHead.position);
                 Block block = _map.getBlock(nextPosition.getX(), nextPosition.getY());
                 if(block != null) {
                     // reachable
                     System.out.printf("visit Block(canPass: %s, position: (%s,%s), isVisited: %s) \n",block.isCanPass(), block.getX(),block.getY(), _nodeMap.isVisited[nextPosition.getX()][nextPosition.getY()]);
                     if(_nodeMap.isVisited[nextPosition.getX()][nextPosition.getY()]) continue;
                     if(!block.isCanPass()) continue;
-                    queue.add(nextPosition);
-                    integratedVisit(nextPosition, currentHead);
+                    queue.add(new BFSNavigatorQueueingNode(nextPosition, currentHead.currentCost + block.getTimeOnPass() + (int)Math.pow((currentHead.position.distanceTo(to)), 3)));
+                    integratedVisit(nextPosition, currentHead.position);
                 }
             }
         }

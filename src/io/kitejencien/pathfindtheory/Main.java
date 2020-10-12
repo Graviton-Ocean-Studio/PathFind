@@ -17,8 +17,8 @@ public class Main {
 
     public Main() {
         BlockMap blockMap = new BlockMapBuilder()
-                .setDimensions(50,50)
-                .buildRandom(0.15,0.6)
+                .setDimensions(256,256)
+                .buildRandom(0.996,0.9, "some other stuff")
                 .build();
 
         Player player = new Player(0,0,blockMap);
@@ -28,7 +28,7 @@ public class Main {
         Panel p = frame.getPanel();
 
         player.setNavigator(new BFSNavigator());
-        NavigationPath path = player.navigate(new Vector2i(30,22));
+        NavigationPath path = player.navigate(new Vector2i(130,130));
         if(path == null) System.out.println("IMPOSSIBLE");
         else {
             frame.getPanel().registerRenderer(path::render);
