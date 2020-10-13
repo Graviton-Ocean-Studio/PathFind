@@ -11,6 +11,7 @@ public class Block {
     private boolean canPass;
     private boolean visited = false;
     private boolean visiting = false;
+    private boolean deepVisited = false;
     private Vector2i pos;
     private int x;
     private int y;
@@ -56,11 +57,23 @@ public class Block {
         return visiting;
     }
 
+    public void setVisiting(boolean visiting) {
+        this.visiting = visiting;
+    }
+
     public Vector2i getPos() {
         return pos;
     }
 
     public void setVisited(boolean visited) {
         this.visited = visited;
+    }
+
+    public void setDeepVisited(boolean deepVisited) {
+        this.deepVisited = deepVisited;
+    }
+
+    public boolean isDeepVisited() {
+        return deepVisited;
     }
 }

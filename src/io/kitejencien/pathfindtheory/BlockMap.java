@@ -27,6 +27,10 @@ public class BlockMap {
         return null;
     }
 
+    public Block getBlock(Vector2i pos){
+        return getBlock(pos.getX(),pos.getY());
+    }
+
     public void setGoal(int x, int y){
         blocks[x][y] = new GoalBlock(x,y);
     }

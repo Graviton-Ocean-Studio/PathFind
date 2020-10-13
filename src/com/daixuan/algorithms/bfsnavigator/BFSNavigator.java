@@ -48,13 +48,20 @@ public class BFSNavigator implements IPlayerNavigator {
         BFSNavigatorQueueingNode currentHead;
         while(!queue.isEmpty()) {
             currentHead = queue.poll();
+            try {
+                Thread.sleep(3);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
 
+            //arrived
             if(currentHead.position.equals(to)) {
                 Stack<Vector2i> path = new Stack<>();
                 Vector2i current = new Vector2i(0,0);
                 current.set(to);
 
                 while(!_nodeMap.from[current.getX()][current.getY()].equals(current)) {
+                    System.out.println(current);
                     path.add(new Vector2i(current.getX(), current.getY()));
                     current.set(_nodeMap.from[current.getX()][current.getY()]);
                 }

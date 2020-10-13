@@ -84,6 +84,18 @@ public class Panel extends JPanel {
                             blockSize -2, blockSize - 2);
                 }
 
+                if(map.getBlock(i,j).isDeepVisited()){
+                    g.setColor(new Color(156,16,228,200));
+                    g.fillOval(blockSize*(i) + 2, blockSize*(j) + 2,
+                            blockSize -2, blockSize - 2);
+                }
+
+                if(map.getBlock(i,j).isVisiting()){
+                    g.setColor(Color.CYAN);
+                    g.fillOval(blockSize*(i) + 2, blockSize*(j) + 2,
+                            blockSize -2, blockSize - 2);
+                }
+
             }
         }
     }

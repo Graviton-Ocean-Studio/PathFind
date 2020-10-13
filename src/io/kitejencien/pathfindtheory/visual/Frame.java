@@ -32,6 +32,8 @@ public class Frame extends JFrame {
         this.add(panel);
 
         this.setVisible(true);
+
+        new FrameUpdator(this).start();
     }
 
     public Dimension initFrameSize(){

@@ -52,4 +52,13 @@ public class Vector2i {
         return Math.sqrt(Math.pow(this._x - point.getX(), 2) + Math.pow(this._y - point.getY(), 2));
     }
 
+    //calculate the distance in blocks
+    public int manhattanDistanceTo(Vector2i point){
+        return Math.abs(this.getX() - point.getX()) + Math.abs(this.getY() - point.getY());
+    }
+
+    @Override
+    public String toString() {
+        return getX() + "," + getY();
+    }
 }
