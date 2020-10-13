@@ -19,7 +19,7 @@ public class Main {
     public Main() {
         BlockMap blockMap = new BlockMapBuilder()
                 .setDimensions(256, 256)
-                .buildRandom(0.4, 0.7)
+                .buildRandom(0.6, 1)
                 .build();
 
         Player player = new Player(0, 0, blockMap);

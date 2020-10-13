@@ -120,6 +120,6 @@ public class AStarNavigator implements IPlayerNavigator {
     //calculate the value of the weight
     //adjust the constants here might influence the behavior of the pathfinding
     public int calcWeight(Vector2i pos0,Vector2i pos, Vector2i to){
-        return (int)Math.abs(pos0.distanceTo(pos)*blockMap.getBlock(pos).getTimeOnPass()) + 10*pos.manhattanDistanceTo(to);
+        return (int)Math.abs(pos0.distanceTo(pos)*blockMap.getBlock(pos).getTimeOnPass()) + (int)(3*pos.distanceTo(to));
     }
 }
