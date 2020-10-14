@@ -37,11 +37,11 @@ public class Frame extends JFrame {
     }
 
     public Dimension initFrameSize(){
-        Dimension screenSize = getToolkit().getScreenSize();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         if(map.xl >= map.yl){
-            this.blockSize = (int)(screenSize.getWidth()/(2*map.xl)) + 4;
+            this.blockSize = (int)(screenSize.getWidth()/(2*map.xl))+2;
         }else{
-            this.blockSize = (int)((screenSize.getHeight()*1.5)/(2*map.yl)) + 4;
+            this.blockSize = (int)((screenSize.getHeight()*1.5)/(2*map.yl))+2;
         }
         return new Dimension(map.xl*blockSize,map.yl*blockSize);
     }

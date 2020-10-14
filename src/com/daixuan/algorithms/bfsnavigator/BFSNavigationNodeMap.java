@@ -2,9 +2,14 @@ package com.daixuan.algorithms.bfsnavigator;
 
 import io.kitejencien.pathfindtheory.Vector2i;
 
+/**
+ * @author QueueHuo
+ */
 public class BFSNavigationNodeMap {
+
     public boolean[][] isVisited;
     public Vector2i[][] from;
+
     public BFSNavigationNodeMap(int xl, int yl) {
         isVisited = new boolean[xl][yl];
         from = new Vector2i[xl][yl];

@@ -4,6 +4,9 @@ import io.kitejencien.pathfindtheory.Vector2i;
 
 import java.util.Comparator;
 
+/**
+ * @author QueueHuo
+ */
 public class BFSNavigatorQueueingNode implements Comparable<BFSNavigatorQueueingNode> {
     public int currentCost;
     public Vector2i position;

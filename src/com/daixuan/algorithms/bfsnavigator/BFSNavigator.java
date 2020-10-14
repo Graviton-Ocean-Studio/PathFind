@@ -9,6 +9,9 @@ import io.kitejencien.pathfindtheory.blocks.Block;
 
 import java.util.*;
 
+/**
+ * @author QueueHuo
+ */
 public class BFSNavigator implements IPlayerNavigator {
 
     public BFSNavigator() {

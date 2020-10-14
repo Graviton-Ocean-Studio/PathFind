@@ -5,6 +5,7 @@ import com.daixuan.algorithms.NavigationMovement;
 import com.daixuan.algorithms.NavigationPath;
 import io.kitejencien.pathfindtheory.BlockMap;
 import io.kitejencien.pathfindtheory.Vector2i;
+import io.kitejencien.pathfindtheory.blocks.BarrierBlock;
 
 import java.util.*;
 
@@ -42,6 +43,8 @@ public class AStarNavigator implements IPlayerNavigator {
     public NavigationPath find(Vector2i from, Vector2i to) {
         Stack<Vector2i> path = new Stack<>();
         this.searchCenter = new Node(calcWeight(from,from,to),blockMap.getBlock(from));
+
+        if(blockMap.getBlock(to) instanceof BarrierBlock) return null;
 
         while(searchCenter != null && !searchCenter.getPos().equals(to) && !IMPOSSIBLE){
             searchSurrounding(this.searchCenter,to);

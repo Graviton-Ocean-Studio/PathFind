@@ -7,20 +7,15 @@ import io.kitejencien.pathfindtheory.navigate.AStarNavigator;
 import io.kitejencien.pathfindtheory.visual.Frame;
 import io.kitejencien.pathfindtheory.visual.Panel;
 
-import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.function.Consumer;
-
 public class Main {
 
-
-
-    public Main() {
+    public Main() throws InterruptedException{
         BlockMap blockMap = new BlockMapBuilder()
-                .setDimensions(256, 256)
-                .buildRandom(0.6, 1)
+                .setDimensions(300, 300)
+                .buildRandom(0.3, 0.7)
                 .build();
+
+        blockMap.setGoal(290, 270);
 
         Player player = new Player(0, 0, blockMap);
 
@@ -29,15 +24,14 @@ public class Main {
         Panel p = frame.getPanel();
 
         player.setNavigator(new AStarNavigator());
-        NavigationPath path = player.navigate(new Vector2i(240, 180));
-        if (path == null) System.out.println("IMPOSSIBLE");
+        NavigationPath path = player.navigate(new Vector2i(290, 270));
+        if (path == null){ System.out.println("IMPOSSIBLE"); }
         else {
             frame.getPanel().registerRenderer(path::render);
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         new Main();
     }
 }
-
