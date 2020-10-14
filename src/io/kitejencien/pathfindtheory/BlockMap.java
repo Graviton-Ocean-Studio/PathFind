@@ -21,10 +21,14 @@ public class BlockMap {
     //get the block on the cord
     public Block getBlock(int x, int y){
 
-        if(x < getBlocks().length && y < getBlocks()[0].length){
+        if(x >= 0 && y>= 0 && x < getBlocks().length && y < getBlocks()[0].length){
              return blocks[x][y];
         }
         return null;
+    }
+
+    public Block getBlock(Vector2i pos){
+        return getBlock(pos.getX(),pos.getY());
     }
 
     public void setGoal(int x, int y){

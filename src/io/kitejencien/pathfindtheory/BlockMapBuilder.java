@@ -1,5 +1,6 @@
 package io.kitejencien.pathfindtheory;
 
+//import com.daixuan.algorithms.Noise;
 import io.kitejencien.pathfindtheory.blocks.BarrierBlock;
 import io.kitejencien.pathfindtheory.blocks.Block;
 import io.kitejencien.pathfindtheory.blocks.BreakableBlock;
@@ -33,20 +34,38 @@ public class BlockMapBuilder {
 
         for(int i = 0; i < blockMap.blocks.length; i++){
             for(int j = 0; j < blockMap.blocks[0].length; j++){
-
-                if(rd.nextDouble() < breakable){
-                    this.blockMap.blocks[i][j] = new Block(i,j);
-                }
-                else if(rd.nextDouble() > barrier){
+                if(rd.nextDouble()>barrier){
                     this.blockMap.blocks[i][j] = new BarrierBlock(i,j);
-                }else {
+                }
+                else if(rd.nextDouble() > breakable){
                     this.blockMap.blocks[i][j] = new BreakableBlock(i,j);
+                }else {
+                    this.blockMap.blocks[i][j] = new Block(i,j);
                 }
             }
         }
 
         return this;
     }
+    /*
+    public BlockMapBuilder buildNoise(){
+        for(int i = 0; i < blockMap.blocks.length; i++){
+            System.out.println();
+            for(int j = 0; j < blockMap.blocks[0].length; j++){
+                double noise = Noise.noise((double)i * 2.0 / this.blockMap.xl,(double)j * 2.0 /this.blockMap.yl) * 10;
+                System.out.print(""+noise+'\t');
+                if(noise < -0.707 + 0.4 * 0.707){
+                    this.blockMap.blocks[i][j] = new BarrierBlock(i,j);
+                }
+                else if(noise < -0.707 + 0.5 * 0.707){
+                    this.blockMap.blocks[i][j] = new BreakableBlock(i,j);
+                }else {
+                    this.blockMap.blocks[i][j] = new Block(i,j);
+                }
+            }
+        }
+    }
+    */
 
     public BlockMap build(){
         if(blockMap.blocks != null)

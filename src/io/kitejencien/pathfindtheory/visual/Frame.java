@@ -15,7 +15,7 @@ public class Frame extends JFrame {
     private BlockMap map;
     private Player player;
     private Panel panel;
-    private int blockSize;
+    public static int blockSize;
 
     public Frame(Player player) throws HeadlessException {
 
@@ -27,19 +27,21 @@ public class Frame extends JFrame {
         setSize(initFrameSize());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        Panel panel = new Panel(this,player);
+        this.panel = new Panel(this,player);
 
         this.add(panel);
 
         this.setVisible(true);
+
+        new FrameUpdator(this).start();
     }
 
     public Dimension initFrameSize(){
-        Dimension screenSize = getToolkit().getScreenSize();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         if(map.xl >= map.yl){
-            this.blockSize = (int)(screenSize.getWidth()/(2*map.xl));
+            this.blockSize = (int)(screenSize.getWidth()/(2*map.xl))+2;
         }else{
-            this.blockSize = (int)((screenSize.getHeight()*1.5)/(2*map.yl));
+            this.blockSize = (int)((screenSize.getHeight()*1.5)/(2*map.yl))+2;
         }
         return new Dimension(map.xl*blockSize,map.yl*blockSize);
     }
@@ -53,7 +55,7 @@ public class Frame extends JFrame {
     }
 
     public Panel getPanel() {
-        return panel;
+        return this.panel;
     }
 
     public Player getPlayer() {

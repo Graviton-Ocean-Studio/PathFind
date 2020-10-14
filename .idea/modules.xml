@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PathFindTheory.iml" filepath="$PROJECT_DIR$/PathFindTheory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PathFind.iml" filepath="$PROJECT_DIR$/PathFind.iml" />
     </modules>
   </component>
 </project>
