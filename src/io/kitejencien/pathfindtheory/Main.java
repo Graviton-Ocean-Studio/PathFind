@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) {
 
         BlockMap blockMap = new BlockMapBuilder()
-                .setDimensions(50,50)
-                .buildRandom(0.2,0.6)
+                .setDimensions(30,30)
+                .buildRandom(0.55,0.9)
                 .build();
 
         Player player = new Player(0,0,blockMap);
