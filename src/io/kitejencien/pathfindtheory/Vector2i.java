@@ -1,7 +1,11 @@
 package io.kitejencien.pathfindtheory;
 
 /**
+<<<<<<< HEAD
+ * @author Queue Huo
+=======
  * @author QueueHuo
+>>>>>>> b9e9f51433ae83173d739a8605135ba395baf5d7
  */
 public class Vector2i {
 

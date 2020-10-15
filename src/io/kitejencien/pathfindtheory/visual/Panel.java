@@ -64,7 +64,9 @@ public class Panel extends JPanel {
                 g.fillRect(blockSize*(i), blockSize*(j),
                         blockSize,blockSize);
 
-                if(map.getBlock(i,j) instanceof BarrierBlock){
+                if(player.getBlock() == map.getBlock(i,j)){
+                    g.setColor(Color.cyan);
+                }else if(map.getBlock(i,j) instanceof BarrierBlock){
                     g.setColor(Color.white);
                 }else if(map.getBlock(i,j) instanceof BreakableBlock){
                     g.setColor(Color.GRAY);
