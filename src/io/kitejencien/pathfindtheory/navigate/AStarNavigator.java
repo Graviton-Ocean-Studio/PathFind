@@ -79,10 +79,9 @@ public class AStarNavigator implements IPlayerNavigator {
         searchCenter.getBlock().setVisiting(false);
         System.out.printf("SearchCenter: Position - %s \n",searchCenter.getPos());
 
-        for (int x = -1; x <= 1; x++) {
-            for (int y = -1; y <= 1; y++) {
+        for (NavigationMovement movement : movements) {
 
-                Vector2i posHere = new Vector2i(searchCenter.getPos().getX()+x,searchCenter.getPos().getY()+y);
+                Vector2i posHere = movement.nextPosition(searchCenter.getPos());
                 if(posHere.getX()<0 || posHere.getX() >= blockMap.xl || posHere.getY() < 0 || posHere.getY()>=blockMap.yl
                         || visited[posHere.getX()][posHere.getY()])
                     continue;
@@ -91,7 +90,6 @@ public class AStarNavigator implements IPlayerNavigator {
                 add.getBlock().setVisited(true);
                 if(!add.getBlock().isCanPass()){continue;}
                 openList.add(add);
-            }
         }
 
         openList = organizeByWeight(openList);
@@ -124,5 +122,15 @@ public class AStarNavigator implements IPlayerNavigator {
     //adjust the constants here might influence the behavior of the pathfinding
     public int calcWeight(Vector2i pos0,Vector2i pos, Vector2i to){
         return (int)Math.abs(pos0.distanceTo(pos)*blockMap.getBlock(pos).getTimeOnPass()) + (int)(3*pos.distanceTo(to));
+    }
+
+    public Queue<Node> buildPath(Queue<Node> in){
+        Queue<Node> out = new LinkedList<>();
+
+        while (!in.isEmpty()){
+            Node current = in.poll();
+
+        }
+        return null;
     }
 }

@@ -34,7 +34,7 @@ public class Player {
         this.navigator = navigator;
         this.navigator.loadMap(map);
         this.navigator.loadMovements(new NavigationMovement[]{
-                up,down,left,right,upLeft,upRight,downLeft,downRight
+                up,down,left,right//,upLeft,upRight,downLeft,downRight
         });
 
     }
