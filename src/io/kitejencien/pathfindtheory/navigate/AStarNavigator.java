@@ -24,6 +24,7 @@ public class AStarNavigator implements IPlayerNavigator {
     private boolean[][] visited;
     private Vector2i[][] from;
     private boolean IMPOSSIBLE = false;
+    private Vector2i to;
 
     private Node searchCenter;
 
@@ -43,7 +44,7 @@ public class AStarNavigator implements IPlayerNavigator {
 
     @Override
     public NavigationPath find(Vector2i from, Vector2i to) {
-        Queue<Vector2i> path = new LinkedList<>();
+        Stack<Vector2i> path = new Stack<>();
         this.searchCenter = new Node(calcWeight(blockMap,from,from,to),blockMap.getBlock(from));
 
         if(blockMap.getBlock(to) instanceof BarrierBlock) return null;
@@ -77,7 +78,7 @@ public class AStarNavigator implements IPlayerNavigator {
         ArrayList<NavigationMovement> navigationMovements = new ArrayList<>();
 
         while(!path.isEmpty()) {
-            Vector2i temporary = path.poll();
+            Vector2i temporary = path.pop();
             navigationMovements.add((e) -> (e.add(temporary.subtract(e))));
             System.out.printf("(%s, %s) -> ", temporary.getX(), temporary.getY());
         }
@@ -114,7 +115,7 @@ public class AStarNavigator implements IPlayerNavigator {
 
     //this will automatically set the node in the queue with the list
     public Queue<Node> organizeByWeight(Queue<Node> in){
-        int leastWeight = 2147483647;
+        double leastWeight = 2147483647;
         Node least = null;
         Queue<Node> out = new LinkedList<>();
         while(!in.isEmpty()){
@@ -137,8 +138,8 @@ public class AStarNavigator implements IPlayerNavigator {
 
     //calculate the value of the weight
     //adjust the constants here might influence the behavior of the pathfinding
-    public static int calcWeight(BlockMap blockMap,Vector2i pos0,Vector2i pos, Vector2i to){
-        return (int)Math.abs(pos0.distanceTo(pos)*blockMap.getBlock(pos).getTimeOnPass()) + (int)(pos.distanceTo(to));
+    public static double calcWeight(BlockMap blockMap,Vector2i pos0,Vector2i pos, Vector2i to){
+        return pos0.distanceTo(pos)/blockMap.getBlock(pos).getTimeOnPass() + (pos.distanceTo(to));
     }
 
     public ArrayList<NavigationMovement> getMovements() {
@@ -169,5 +170,19 @@ public class AStarNavigator implements IPlayerNavigator {
         return from;
     }
 
+    public void setTo(Vector2i to) {
+        this.to = to;
+    }
 
+    public void setSearchCenter(Node searchCenter) {
+        this.searchCenter = searchCenter;
+    }
+
+    public void setFrom(Vector2i[][] from) {
+        this.from = from;
+    }
+
+    public Vector2i getTo() {
+        return to;
+    }
 }
