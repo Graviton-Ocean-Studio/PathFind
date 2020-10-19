@@ -11,12 +11,12 @@ import io.kitejencien.pathfindtheory.blocks.Block;
  */
 public class Node {
 
-    private int _weight;
+    private double _weight;
     private Block block;
     private Vector2i pos;
 
 
-    public Node(int _weight, Block block){
+    public Node(double _weight, Block block){
         this._weight = _weight;
         this.block = block;
         this.pos = block.getPos();
@@ -31,12 +31,17 @@ public class Node {
     }
 
 
-    public int get_weight() {
+    public double get_weight() {
         return _weight;
     }
 
     @Override
     public String toString() {
         return getPos() + " " + getBlock().getClass().getSimpleName();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.getBlock().equals(((Node)obj).getBlock()) && this.getPos().equals(((Node)obj).getPos());
     }
 }

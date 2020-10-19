@@ -76,4 +76,10 @@ public class Block {
     public boolean isDeepVisited() {
         return deepVisited;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Block b = (Block)obj;
+        return this.x == b.x && this.y == b.y && this.getClass().equals(b.getClass());
+    }
 }

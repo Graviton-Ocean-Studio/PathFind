@@ -24,6 +24,7 @@ public class AStarNavigator implements IPlayerNavigator {
     private boolean[][] visited;
     private Vector2i[][] from;
     private boolean IMPOSSIBLE = false;
+    private Vector2i to;
 
     private Node searchCenter;
 
@@ -43,8 +44,8 @@ public class AStarNavigator implements IPlayerNavigator {
 
     @Override
     public NavigationPath find(Vector2i from, Vector2i to) {
-        Queue<Vector2i> path = new LinkedList<>();
-        this.searchCenter = new Node(calcWeight(from,from,to),blockMap.getBlock(from));
+        Stack<Vector2i> path = new Stack<>();
+        this.searchCenter = new Node(calcWeight(blockMap,from,from,to),blockMap.getBlock(from));
 
         if(blockMap.getBlock(to) instanceof BarrierBlock) return null;
 
@@ -77,7 +78,7 @@ public class AStarNavigator implements IPlayerNavigator {
         ArrayList<NavigationMovement> navigationMovements = new ArrayList<>();
 
         while(!path.isEmpty()) {
-            Vector2i temporary = path.poll();
+            Vector2i temporary = path.pop();
             navigationMovements.add((e) -> (e.add(temporary.subtract(e))));
             System.out.printf("(%s, %s) -> ", temporary.getX(), temporary.getY());
         }
@@ -91,29 +92,30 @@ public class AStarNavigator implements IPlayerNavigator {
         searchCenter.getBlock().setVisiting(false);
         System.out.printf("SearchCenter: Position - %s \n",searchCenter.getPos());
 
-        for (NavigationMovement movement: movements) {
+        for (NavigationMovement movement : movements) {
 
+            Vector2i posHere = movement.nextPosition(searchCenter.getPos());
+            if(posHere.getX()<0 || posHere.getX() >= blockMap.xl || posHere.getY() < 0 || posHere.getY()>=blockMap.yl
+                    || visited[posHere.getX()][posHere.getY()])
+                continue;
 
-                Vector2i posHere = movement.nextPosition(searchCenter.getPos());
-                if(posHere.getX()<0 || posHere.getX() >= blockMap.xl || posHere.getY() < 0 || posHere.getY()>=blockMap.yl
-                        || visited[posHere.getX()][posHere.getY()])
-                    continue;
+            Node add = new Node(calcWeight(blockMap,searchCenter.getPos(),posHere,to),blockMap.getBlock(posHere));
+            this.from[add.getPos().getX()][add.getPos().getY()] = searchCenter.getPos();
 
-                Node add = new Node(calcWeight(searchCenter.getPos(),posHere,to),blockMap.getBlock(posHere));
-                this.from[add.getPos().getX()][add.getPos().getY()] = searchCenter.getPos();
-
-                visited[posHere.getX()][posHere.getY()] = true;
-                add.getBlock().setVisited(true);
-                if(!add.getBlock().isCanPass()){continue;}
-                openList.add(add);
+            visited[posHere.getX()][posHere.getY()] = true;
+            add.getBlock().setVisited(true);
+            if(!add.getBlock().isCanPass()){continue;}
+            openList.add(add);
         }
 
         openList = organizeByWeight(openList);
     }
 
+
+
     //this will automatically set the node in the queue with the list
     public Queue<Node> organizeByWeight(Queue<Node> in){
-        int leastWeight = 2147483647;
+        double leastWeight = 2147483647;
         Node least = null;
         Queue<Node> out = new LinkedList<>();
         while(!in.isEmpty()){
@@ -136,7 +138,51 @@ public class AStarNavigator implements IPlayerNavigator {
 
     //calculate the value of the weight
     //adjust the constants here might influence the behavior of the pathfinding
-    public int calcWeight(Vector2i pos0,Vector2i pos, Vector2i to){
-        return (int)Math.abs(pos0.distanceTo(pos)*blockMap.getBlock(pos).getTimeOnPass()) + (int)(pos.distanceTo(to));
+    public static double calcWeight(BlockMap blockMap,Vector2i pos0,Vector2i pos, Vector2i to){
+        return pos0.distanceTo(pos)/blockMap.getBlock(pos).getTimeOnPass() + (pos.distanceTo(to));
+    }
+
+    public ArrayList<NavigationMovement> getMovements() {
+        return movements;
+    }
+
+    public BlockMap getBlockMap() {
+        return blockMap;
+    }
+
+    public boolean[][] getVisited() {
+        return visited;
+    }
+
+    public Node getSearchCenter() {
+        return searchCenter;
+    }
+
+    public Queue<Node> getOpenList() {
+        return openList;
+    }
+
+    public Stack<Node> getClosedSearchCenters() {
+        return closedSearchCenters;
+    }
+
+    public Vector2i[][] getFrom() {
+        return from;
+    }
+
+    public void setTo(Vector2i to) {
+        this.to = to;
+    }
+
+    public void setSearchCenter(Node searchCenter) {
+        this.searchCenter = searchCenter;
+    }
+
+    public void setFrom(Vector2i[][] from) {
+        this.from = from;
+    }
+
+    public Vector2i getTo() {
+        return to;
     }
 }

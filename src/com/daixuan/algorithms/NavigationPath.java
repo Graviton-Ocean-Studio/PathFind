@@ -54,5 +54,7 @@ public class NavigationPath implements Iterator {
         return _currentPosision;
     }
 
-
+    public ArrayList<NavigationMovement> get_movements() {
+        return _movements;
+    }
 }
