@@ -11,6 +11,9 @@ import io.kitejencien.pathfindtheory.Vector2i;
  * @author KiteJencien
  */
 public class SprintMapNavigator implements IPlayerNavigator {
+
+
+
     @Override
     public void loadMap(BlockMap blockMap) {
 
@@ -25,4 +28,6 @@ public class SprintMapNavigator implements IPlayerNavigator {
     public NavigationPath find(Vector2i from, Vector2i to) {
         return null;
     }
+
+
 }
