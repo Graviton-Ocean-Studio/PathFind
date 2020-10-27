@@ -58,10 +58,17 @@ public class DualAStarNavigator implements IPlayerNavigator {
         navigatorP.setSearchCenter(new Node(AStarNavigator.calcWeight(blockMap,from,from,to),blockMap.getBlock(from)));
         navigatorG.setSearchCenter(new Node(AStarNavigator.calcWeight(blockMap,to,to,from),blockMap.getBlock(to)));
 
+        while(!navigatorP.getSearchCenter().equals(navigatorG.getSearchCenter())){
+            navigatorP.searchSurrounding(navigatorP.getSearchCenter(),to);
+            navigatorG.searchSurrounding(navigatorG.getSearchCenter(),from);
+        }
+
         return null;
     }
 
+    public void getpath(){
 
+    }
 
 
 

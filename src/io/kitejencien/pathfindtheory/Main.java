@@ -12,11 +12,11 @@ public class Main {
 
     public Main() throws InterruptedException{
         BlockMap blockMap = new BlockMapBuilder()
-                .setDimensions(80, 40)
-                .buildRandom(1, 1)
+                .setDimensions(200, 200)
+                .buildCaves()
                 .build();
 
-        blockMap.setGoal(76, 32);
+        blockMap.setGoal(190, 190);
 
 
         Player player = new Player(0, 0, blockMap);
@@ -27,7 +27,7 @@ public class Main {
 
         player.setNavigator(new AStarNavigator());
 
-        NavigationPath path = player.navigate(new Vector2i(76, 32));
+        NavigationPath path = player.navigate(new Vector2i(190, 190));
         if (path == null){ System.out.println("IMPOSSIBLE"); }
         else {
             frame.getPanel().registerRenderer(path::render);
@@ -46,5 +46,6 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         new Main();
+
     }
 }
